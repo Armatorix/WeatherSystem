@@ -1,0 +1,19 @@
+galaxy_info:
+  author: Wojciech Sokołowski
+  description: Init prometheus with gateway and grafana on raspberry pi
+
+  license: license (GPLv2, CC-BY, etc)
+
+  min_ansible_version: 1.2
+
+  platforms:
+    - name: Raspbian
+      versions:
+        - 10.2
+
+  galaxy_tags:
+    - prometheus
+    - grafana
+    - pushgateway
+    - docker
+    - compose

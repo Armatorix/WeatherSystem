@@ -1,0 +1,41 @@
+---
+- name: create prometheus system group
+  group:
+    name: prometheus
+    system: true
+    state: present
+
+- name: create prometheus system user
+  user:
+    name: prometheus
+    system: true
+    shell: "/sbin/nologin"
+    group: prometheus
+    createhome: false
+    home: "{{ prometheus_data_dir }}"
+
+- name: adding pi user to group
+  user:
+    name: "pi"
+    groups: prometheus
+    append: yes
+
+- name: create prometheus configuration directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: prometheus
+    group: prometheus
+    mode: 0774
+  with_items:
+    - "{{ prometheus_conf_dir }}"
+    - "{{ prometheus_data_dir }}"
+
+- name: create prometheus config file
+  copy: 
+    src: "prometheus/{{ item }}"
+    dest: "{{ prometheus_conf_dir }}/{{ item }}"
+    owner: prometheus
+    group: prometheus
+  with_items:
+    - "prometheus.yml"

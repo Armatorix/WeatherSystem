@@ -1,0 +1,9 @@
+---
+prometheus_data_dir: "/var/prometheus"
+prometheus_conf_dir: "/etc/prometheus"
+
+grafana_data_dir: "/var/grafana"
+grafana_conf_dir: "/etc/grafana"
+
+monitoring_conf_dir: "/etc/monitoring"
+systemd_dir: "/etc/systemd/system"

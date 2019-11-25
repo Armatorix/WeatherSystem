@@ -1,0 +1,15 @@
+---
+- include: prometheus.yml
+  tags:
+    - setup
+    - prometheus
+
+- include: grafana.yml
+  tags:
+    - setup
+    - grafana
+
+- include: compose.yml
+  tags:
+    - setup
+    - compose

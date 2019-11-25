@@ -1,0 +1,13 @@
+---
+- name: start monitoring service
+  become: true
+  systemd:
+    name: docker-monitoring
+    state: started
+    daemon_reload: yes
+- name: restart monitoring service
+  become: true
+  systemd:
+    name: docker-monitoring
+    state: restarted
+    daemon_reload: yes

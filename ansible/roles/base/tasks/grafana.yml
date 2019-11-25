@@ -1,0 +1,53 @@
+---
+- name: create grafana system group
+  group:
+    name: grafana
+    system: true
+    state: present
+
+- name: create grafana system user
+  user:
+    name: grafana
+    system: true
+    shell: "/sbin/nologin"
+    group: grafana
+    createhome: false
+    home: "{{ grafana_data_dir }}"
+
+- name: adding pi user to group
+  user:
+    name: "pi"
+    groups: grafana
+    append: yes
+
+- name: create grafana configuration directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: grafana
+    group: grafana
+    mode: 0774
+  with_items:
+    - "{{ grafana_data_dir }}"
+    - "{{ grafana_conf_dir }}"
+
+- name: copy grafana provisioning
+  copy:
+    src: "grafana/{{ item }}/"
+    dest: "{{ grafana_data_dir }}/{{ item }}/"
+    owner: grafana
+    group: grafana
+    mode: 0774
+    directory_mode: True
+  with_items:
+    - "provisioning"
+
+- name: create grafana config file
+  copy:
+    src: "grafana/{{item}}"
+    dest: "{{ grafana_conf_dir }}/{{ item }}"
+    owner: grafana
+    group: grafana
+    mode: 0774
+  with_items:
+    - "grafana.ini"
