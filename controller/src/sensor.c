@@ -16,8 +16,6 @@ const char *password = "network_pass";
 
 Adafruit_BME280 bme;
 
-//webserver
-
 void setupESP()
 {
   pinMode(2, OUTPUT);
