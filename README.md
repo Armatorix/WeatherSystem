@@ -9,9 +9,12 @@ ESP8266 + BME280
 Router
 
 ### Software
-Ansible
-Arduino IDE
+* Ansible
+* Arduino IDE
 
+On RPi:
+* docker
+* docker-compose
 ## How to 
 
 
@@ -25,9 +28,11 @@ Arduino IDE
         * RPI_IP
         * network_ssid 
         * network_pass 
-        * INSTANCE_NAME - to placement name of sensor
+        * INSTANCE_NAME - placement name of sensor
    to your RPI static IP
 3. `cd ansible && ansible-playbook init.yml`
 4. Setup your microcontroller like [here](https://how2electronics.com/esp8266-bme280-based-mini-weather-station/), but with this code: [controller/src/sensor.ino](controller/src/sensor.ino).
 
 Aaand you're ready to rock!
+
+Your graphs with temperature and humidity should be available on http://RPI_IP:3000
